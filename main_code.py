@@ -6,20 +6,20 @@ import glob
 
 config = open('config.txt', 'r').read()
 # NOTE: creates a list of files within a folder specified in config file
-folder = config.split('\n')[2].split('=')[1].strip() 
+folder = config.split('\n')[2].split('=')[1].strip()
 from_col = int(config.split('\n')[5].split('=')[1])
 to_col = int(config.split('\n')[6].split('=')[1])
 
 # NOTE: gets the current directory
-cwd = os.getcwd() 
+cwd = os.getcwd()
 # NOTE: creates a list of files in a directory we want
-files = sorted(glob.glob(os.path.join(cwd, folder,"*.txt"))) 
+files = sorted(glob.glob(os.path.join(cwd, folder,"*.txt")))
 print('Used files:\n', ',\n'.join([os.path.basename(x) for x in files]))
 
 header = []
 for x in range(0, len(files)):
     t_file = open(files[x], 'r')
-    print('loaded')
+    print(' '.join('loaded', str(os.path.basename(x))))
     t_header = t_file.readline().split()
     t_array = np.loadtxt(t_file, skiprows=1)
     data = t_array[0,:]
